@@ -13,9 +13,10 @@ public class AccountBasicCLI {
 
     public void createAccountRequest(String clientID) {
         //TODO: implement the method
+        this.bankCore.createNewAccount(accountType, clientID);
     }
 
     public void getAccounts(String clientID) {
-        //TODO: implement the method
+        return;
     }
 }

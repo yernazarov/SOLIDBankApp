@@ -1,74 +1,45 @@
 package com.zhandos.SOLIDBankApp;
 
+import org.springframework.lang.Nullable;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class MyCLI implements CLIUI{
-    private final Scanner scanner;
+    private Scanner scanner;
 
-    public static void main(String[] args) {
-        printManual();
-        MyCLI myCLI = new MyCLI(new Scanner(System.in));
-        while (true) {
-            System.out.print("> ");
-            String number = myCLI.scanner.nextLine();
-            switch (number) {
-                case "1" -> myCLI.showAccounts();
-                case "2" -> myCLI.createAccount();
-                case "3" -> myCLI.printNotImplemented();
-                case "4" -> myCLI.printNotImplemented();
-                case "5" -> myCLI.printNotImplemented();
-                case "6" -> printManual();
-                case "7" -> myCLI.exit();
-                default -> System.out.println("Please enter valid number");
-            }
-        }
+    public MyCLI() {
+        this.scanner = new Scanner(System.in);
     }
 
-    public MyCLI(Scanner scanner) {
+    MyCLI(Scanner scanner) {
         this.scanner = scanner;
     }
 
     public double requestClientAmount() {
-        //TODO: implement the method
+        System.out.println("This feature is not implemented in the UML diagram (Grey Area)");
         return 0.0;
     }
 
     public String requestClientAccountNumber() {
-        //TODO: implement the method
+        System.out.println("This feature is not implemented in the UML diagram (Grey Area)");
         return "";
     }
 
+    @Nullable
     public AccountType requestAccountType() {
-        //TODO: implement the method
-        return new AccountType();
-    }
+        System.out.println("Choose account type\n[CHECKING, SAVING, FIXED]");
+        String accountType = this.scanner.nextLine();
+        if (accountType == "CHECKING") {
 
-    public void printNotImplemented() {
-        System.out.println("This feature is not implemented in the UML diagram (Grey Area)");
-    }
+        } else if (accountType == "SAVING"){
 
-    private void showAccounts() {
-    }
+        } else if (accountType == "FIXED") {
 
-    private void createAccount() {
-    }
-
-    private static void printManual() {
-        try {
-            File read_file = new File("src/main/resources/manual.txt");
-            Scanner scanner = new Scanner(read_file);
-            while (scanner.hasNextLine()) {
-                System.out.println(scanner.nextLine());
-            }
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+        } else {
+            System.out.println("Please enter valid account type");
         }
-    }
-    public void exit() {
-        System.out.println("Application Closed");
-        System.exit(0);
+        return new AccountType();
     }
 }

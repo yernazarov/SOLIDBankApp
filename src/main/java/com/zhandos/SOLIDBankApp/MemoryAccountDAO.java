@@ -1,9 +1,10 @@
 package com.zhandos.SOLIDBankApp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MemoryAccountDAO implements AccountDAO{
-    private List<Account> accountList;
+    private List<Account> accountList = new ArrayList<Account>();
 
     @Override
     public List<Account> getClientAccounts(String clientID) {
@@ -22,7 +23,7 @@ public class MemoryAccountDAO implements AccountDAO{
 
     @Override
     public List<Account> getClientAccountsByType(String clientID, AccountType accountType) {
-        return null;
+        return getClientAccounts();
     }
 
     @Override
