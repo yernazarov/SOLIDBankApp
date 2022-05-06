@@ -1,7 +1,9 @@
 package com.zhandos.SOLIDBankApp;
 
+import com.zhandos.SOLIDBankApp.businessProcessInterfaces.AccountCreationService;
+
 public class BankCore {
-    private static long id = 1; //is the id same for every client?
+    private static long id = 1;
     private long lastAccountNumber = 1;
     private AccountCreationService accountCreation;
 
@@ -10,10 +12,12 @@ public class BankCore {
     }
 
     public void createNewAccount(AccountType accountType, String clientID) {
-        //TODO: implement the method
+        accountCreation.create(accountType, id, clientID, lastAccountNumber);
+        incrementLastAccountNumber();
+        System.out.println("Bank account created");
     }
 
     private void incrementLastAccountNumber() {
-        //TODO: implement the method
+        lastAccountNumber++;
     }
 }

@@ -1,19 +1,26 @@
 package com.zhandos.SOLIDBankApp;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        AccountBasicCLI accountBasicCLI = (AccountBasicCLI) context.getBean("accountBasicCLI");
         printManual();
-        MyCLI myCLI = new MyCLI();
+        Scanner scanner = new Scanner(System.in);
+        String clientID = "1"; // We are working with only one user and after the exit, all data would be wiped out.
+                               // Therefore, no need for generating new clientIDs. For this project, at least.
         while (true) {
             System.out.print("> ");
-            String number = myCLI.scanner.nextLine();
+            String number = scanner.nextLine();
             switch (number) {
-                case "1" -> myCLI.showAccounts();
-                case "2" -> myCLI.createAccount();
+                case "1" -> accountBasicCLI.getAccounts(clientID);
+                case "2" -> accountBasicCLI.createAccountRequest(clientID);
                 case "3" -> printNotImplemented();
                 case "4" -> printNotImplemented();
                 case "5" -> printNotImplemented();

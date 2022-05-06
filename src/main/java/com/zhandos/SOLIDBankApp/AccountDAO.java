@@ -1,5 +1,7 @@
 package com.zhandos.SOLIDBankApp;
 
+import com.zhandos.SOLIDBankApp.accountTypes.AccountWithdraw;
+
 import java.util.List;
 
 public interface AccountDAO {

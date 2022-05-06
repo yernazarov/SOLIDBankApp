@@ -1,5 +1,11 @@
 package com.zhandos.SOLIDBankApp;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 public class AccountType {
-    //TODO: find out why this is needed
+    public String name;
+    public AccountType(String name) {
+        this.name = name;
+    }
 }

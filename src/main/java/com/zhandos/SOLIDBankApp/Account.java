@@ -1,13 +1,16 @@
 package com.zhandos.SOLIDBankApp;
 
-public class Account {
+public abstract class Account {
     private AccountType accountType;
     private String id;
     private String clientID;
     private double balance;
-    private boolean withdrawAllowed;
+    protected boolean withdrawAllowed; //was changed to protected to implement the abstraction
     public double getBalance = this.balance;
-    public String toString;
+    public String toString() { //this is defined as parameter in UML, but it is impossible for immutable object as String
+                               //to be constantly changing (because of the balance) parameter, so I changed it to method
+        return String.format("Account{accountType=%s, id='%s', clientID='%s', balance=%.1f}", accountType.name, id, clientID, balance);
+    }
 
     public String getClientID() {
         return this.clientID;
@@ -25,13 +28,9 @@ public class Account {
         this.withdrawAllowed = withdrawAllowed;
     }
 
-    public boolean isWithdrawAllowed() {
-        return this.withdrawAllowed;
-    }
+    public abstract boolean isWithdrawAllowed();
 
-    public void setWithdrawAllowed(boolean withdrawAllowed) {
-        this.withdrawAllowed = withdrawAllowed;
-    }
+    public abstract void setWithdrawAllowed(boolean withdrawAllowed);
 
     public AccountType getAccountType() {
         return this.accountType;
@@ -48,7 +47,7 @@ public class Account {
     public void setId(String id) {
         this.id = id;
     }
-    //id getBalance needed?
+
     public void setBalance(double balance) {
         this.balance = balance;
     }

@@ -1,4 +1,6 @@
 package com.zhandos.SOLIDBankApp;
 
-public interface CLIUI extends CreateAccountOperationUI{
+import com.zhandos.SOLIDBankApp.ui.CreateAccountOperationUI;
+
+public interface CLIUI extends CreateAccountOperationUI {
 }

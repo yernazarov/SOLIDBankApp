@@ -10,4 +10,25 @@
     <bean id="myCLI" class="com.zhandos.SOLIDBankApp.MyCLI">
     </bean>
 
+    <bean id="accountDAO" class="com.zhandos.SOLIDBankApp.MemoryAccountDAO">
+    </bean>
+
+    <bean id="accountCreation" class="com.zhandos.SOLIDBankApp.businessProcessInterfaceImpl.AccountCreationServiceImpl">
+        <constructor-arg ref="accountDAO"/>
+    </bean>
+
+    <bean id="accountListing" class="com.zhandos.SOLIDBankApp.businessProcessInterfaceImpl.AccountListingServiceImpl">
+        <constructor-arg ref="accountDAO"/>
+    </bean>
+
+    <bean id="bankCore" class="com.zhandos.SOLIDBankApp.BankCore">
+        <constructor-arg ref="accountCreation"/>
+    </bean>
+
+    <bean id="accountBasicCLI" class="com.zhandos.SOLIDBankApp.AccountBasicCLI">
+        <constructor-arg ref="myCLI"/>
+        <constructor-arg ref="bankCore"/>
+        <constructor-arg ref="accountListing"/>
+    </bean>
+
 </beans>

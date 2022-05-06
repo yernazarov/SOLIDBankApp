@@ -1,4 +1,8 @@
-package com.zhandos.SOLIDBankApp;
+package com.zhandos.SOLIDBankApp.businessProcessInterfaces;
+
+import com.zhandos.SOLIDBankApp.Account;
+import com.zhandos.SOLIDBankApp.AccountType;
+import com.zhandos.SOLIDBankApp.accountTypes.AccountWithdraw;
 
 import java.util.List;
 
