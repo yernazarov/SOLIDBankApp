@@ -1,16 +1,23 @@
 package com.zhandos.SOLIDBankApp;
 
+import com.zhandos.SOLIDBankApp.cli.AccountBasicCLI;
+import com.zhandos.SOLIDBankApp.cli.TransactionDepositCLI;
+import com.zhandos.SOLIDBankApp.cli.TransactionWithdrawCLI;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("props.xml");
-        AccountBasicCLI accountBasicCLI = (AccountBasicCLI) context.getBean("accountBasicCLI");
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        AccountBasicCLI accountBasicCLI = context.getBean(AccountBasicCLI.class);
+        TransactionWithdrawCLI transactionWithdrawCLI = context.getBean(TransactionWithdrawCLI.class);
+        TransactionDepositCLI transactionDepositCLI = context.getBean(TransactionDepositCLI.class);
         printManual();
         Scanner scanner = new Scanner(System.in);
         String clientID = "1"; // We are working with only one user and after the exit, all data would be wiped out.
@@ -21,8 +28,8 @@ public class Main {
             switch (number) {
                 case "1" -> accountBasicCLI.getAccounts(clientID);
                 case "2" -> accountBasicCLI.createAccountRequest(clientID);
-                case "3" -> printNotImplemented();
-                case "4" -> printNotImplemented();
+                case "3" -> transactionDepositCLI.depositMoney(clientID);
+                case "4" -> transactionWithdrawCLI.withdrawMoney(clientID);
                 case "5" -> printNotImplemented();
                 case "6" -> printManual();
                 case "7" -> exit();
@@ -32,7 +39,7 @@ public class Main {
     }
 
     public static void printNotImplemented() {
-        System.out.println("This feature is not implemented in the UML diagram (Grey Area)");
+        System.out.println("This feature is not implemented in the UML diagram");
     }
 
     private static void printManual() {

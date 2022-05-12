@@ -25,7 +25,7 @@
         <constructor-arg ref="accountCreation"/>
     </bean>
 
-    <bean id="accountBasicCLI" class="com.zhandos.SOLIDBankApp.AccountBasicCLI">
+    <bean id="accountBasicCLI" class="com.zhandos.SOLIDBankApp.cli.AccountBasicCLI">
         <constructor-arg ref="myCLI"/>
         <constructor-arg ref="bankCore"/>
         <constructor-arg ref="accountListing"/>

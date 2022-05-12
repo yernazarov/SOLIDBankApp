@@ -1,6 +1,7 @@
 package com.zhandos.SOLIDBankApp;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.lang.Nullable;
 
@@ -20,25 +21,43 @@ public class MyCLI implements CLIUI{
         this.scanner = scanner;
     }
 
+    private void tryAgain() {
+        System.out.println("Error, that is not a valid input, try again!");
+        this.scanner.next();
+    }
+
     public double requestClientAmount() {
-        System.out.println("This feature is not implemented in the UML diagram (Grey Area)");
-        return 0.0;
+        System.out.println("Type amount of money");
+        double amount = -1;
+        while (true) {
+            if (!this.scanner.hasNextDouble()) {
+                tryAgain();
+                continue;
+            }
+            amount = this.scanner.nextDouble();
+            if (amount < 0) {
+                tryAgain();
+                continue;
+            }
+            break;
+        }
+        this.scanner.nextLine();
+        return amount;
     }
 
     public String requestClientAccountNumber() {
-        System.out.println("This feature is not implemented in the UML diagram (Grey Area)");
-        return "";
+        System.out.println("Type account ID");
+        return this.scanner.nextLine();
     }
 
     public AccountType requestAccountType() {
         System.out.println("Choose account type\n[CHECKING, SAVING, FIXED]");
-        while (true) {
-            String accountTypeName = this.scanner.nextLine();
-            if (!accountTypeName.equals("CHECKING") && !accountTypeName.equals("SAVING") && !accountTypeName.equals("FIXED")) {
-                System.out.println("Please enter valid account type");
-            } else {
-                return new AccountType(accountTypeName);
-            }
+        String accountTypeName = this.scanner.nextLine();
+        if (!accountTypeName.equals("CHECKING") && !accountTypeName.equals("SAVING") && !accountTypeName.equals("FIXED")) {
+            System.out.println("Error, you entered wrong account type, try again!");
+            return null;
+        } else {
+            return new AccountType(accountTypeName);
         }
     }
 }
