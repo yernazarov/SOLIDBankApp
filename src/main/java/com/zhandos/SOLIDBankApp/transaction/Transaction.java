@@ -1,8 +1,8 @@
 package com.zhandos.SOLIDBankApp.transaction;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public class Transaction {
     String transaction;
-    public Transaction(String transaction) {
-        this.transaction = transaction;
-    }
 }

@@ -11,10 +11,6 @@ public class AccountWithdrawServiceImpl implements AccountWithdrawService {
 
     @Override
     public void withdraw(double amount, AccountWithdraw account) {
-        if (account.getBalance() > amount) {
-            account.setBalance(amount-account.getBalance());
-        } else {
-            System.out.println("You do not have sufficient funds for this operation");
-        }
+        account.setBalance(account.getBalance()-amount);
     }
 }

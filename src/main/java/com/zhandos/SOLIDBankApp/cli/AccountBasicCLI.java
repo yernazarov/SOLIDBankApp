@@ -5,20 +5,16 @@ import com.zhandos.SOLIDBankApp.account.AccountType;
 import com.zhandos.SOLIDBankApp.BankCore;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaces.AccountListingService;
 import com.zhandos.SOLIDBankApp.ui.CreateAccountOperationUI;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 public class AccountBasicCLI {
     private CreateAccountOperationUI createAccountOperationUI;
     private BankCore bankCore;
     private AccountListingService accountListing;
-
-    public AccountBasicCLI(CreateAccountOperationUI createAccountOperationUI, BankCore bankCore, AccountListingService accountListing) {
-        this.createAccountOperationUI = createAccountOperationUI;
-        this.bankCore = bankCore;
-        this.accountListing = accountListing;
-    }
 
     public void createAccountRequest(String clientID) {
         AccountType accountType = createAccountOperationUI.requestAccountType();
