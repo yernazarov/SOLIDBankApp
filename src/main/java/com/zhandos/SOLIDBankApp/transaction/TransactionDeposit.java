@@ -2,15 +2,12 @@ package com.zhandos.SOLIDBankApp.transaction;
 
 import com.zhandos.SOLIDBankApp.account.Account;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaces.AccountDepositService;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class TransactionDeposit {
     private AccountDepositService accountDepositService;
     private TransactionDAO transactionDAO;
-
-    public TransactionDeposit(AccountDepositService accountDepositService, TransactionDAO transactionDAO) {
-        this.accountDepositService = accountDepositService;
-        this.transactionDAO = transactionDAO;
-    }
 
     public void execute(Account account, double amount) {
         accountDepositService.deposit(amount, account);

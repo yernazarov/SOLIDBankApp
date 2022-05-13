@@ -7,13 +7,11 @@ import com.zhandos.SOLIDBankApp.account.AccountType;
 import com.zhandos.SOLIDBankApp.account.accountTypes.accountSubtypes.CheckingAccount;
 import com.zhandos.SOLIDBankApp.account.accountTypes.accountSubtypes.FixedAccount;
 import com.zhandos.SOLIDBankApp.account.accountTypes.accountSubtypes.SavingAccount;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class AccountCreationServiceImpl implements AccountCreationService {
     private AccountDAO accountDAO;
-
-    public AccountCreationServiceImpl(AccountDAO accountDAO) {
-        this.accountDAO = accountDAO;
-    }
 
     @Override
     public void create(AccountType accountType, long bankID, String clientID, long accountID) {

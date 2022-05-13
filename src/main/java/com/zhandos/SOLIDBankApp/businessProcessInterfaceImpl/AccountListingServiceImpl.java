@@ -5,16 +5,13 @@ import com.zhandos.SOLIDBankApp.account.AccountDAO;
 import com.zhandos.SOLIDBankApp.account.AccountType;
 import com.zhandos.SOLIDBankApp.account.accountTypes.AccountWithdraw;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaces.AccountListingService;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 
+@AllArgsConstructor
 public class AccountListingServiceImpl implements AccountListingService {
     private AccountDAO accountDAO;
-
-    //this constructor is not specified in the UML diagram, however I added it because without it, logic would be incomplete
-    public AccountListingServiceImpl(AccountDAO accountDAO) {
-        this.accountDAO = accountDAO;
-    }
 
     @Override
     public Account getClientAccount(String clientID, String accountID) {

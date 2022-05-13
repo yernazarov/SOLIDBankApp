@@ -2,15 +2,12 @@ package com.zhandos.SOLIDBankApp.transaction;
 
 import com.zhandos.SOLIDBankApp.account.accountTypes.AccountWithdraw;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaces.AccountWithdrawService;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class TransactionWithdraw {
     private AccountWithdrawService accountWithdrawService;
     private TransactionDAO transactionDAO;
-
-    public TransactionWithdraw(AccountWithdrawService accountWithdrawService, TransactionDAO transactionDAO) {
-        this.accountWithdrawService = accountWithdrawService;
-        this.transactionDAO = transactionDAO;
-    }
 
     public void execute(AccountWithdraw account, double amount) {
         accountWithdrawService.withdraw(amount, account);
