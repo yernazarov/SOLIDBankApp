@@ -14,7 +14,10 @@ public class TransactionWithdraw {
 
     public void execute(AccountWithdraw account, double amount) {
         accountWithdrawService.withdraw(amount, account);
-        transactionDAO.addTransaction(new Transaction(String.format("%.2f$ transferred from %s account", amount, account.getId())));
-        System.out.println(transactionDAO.getTransactions().get(transactionDAO.getTransactions().size() - 1).transaction);
+        if (account.getBalance() > amount) { // Костыль
+            transactionDAO.addTransaction(new Transaction(String.format("%.2f$ transferred from %s account", amount, account.getId())));
+            System.out.println(transactionDAO.getTransactions().get(transactionDAO.getTransactions().size() - 1).transaction);
+        }
+
     }
 }
