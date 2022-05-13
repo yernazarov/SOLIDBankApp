@@ -3,19 +3,26 @@ package com.zhandos.SOLIDBankApp;
 import com.zhandos.SOLIDBankApp.cli.AccountBasicCLI;
 import com.zhandos.SOLIDBankApp.cli.TransactionDepositCLI;
 import com.zhandos.SOLIDBankApp.cli.TransactionWithdrawCLI;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 @SpringBootApplication
-public class Main {
+public class Main implements CommandLineRunner {
+    @Autowired
+    private ApplicationContext context;
+
     public static void main(String[] args) {
-        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-        AccountBasicCLI accountBasicCLI = context.getBean(AccountBasicCLI.class);
+        SpringApplication.run(Main.class);
+    }
+    @Override
+    public void run(String... arg0) {
+        AccountBasicCLI accountBasicCLI = this.context.getBean(AccountBasicCLI.class);
         TransactionWithdrawCLI transactionWithdrawCLI = context.getBean(TransactionWithdrawCLI.class);
         TransactionDepositCLI transactionDepositCLI = context.getBean(TransactionDepositCLI.class);
         printManual();
