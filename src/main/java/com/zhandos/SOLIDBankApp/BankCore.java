@@ -1,5 +1,6 @@
 package com.zhandos.SOLIDBankApp;
 
+import com.zhandos.SOLIDBankApp.account.AccountType;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaces.AccountCreationService;
 
 public class BankCore {

@@ -1,4 +1,4 @@
-package com.zhandos.SOLIDBankApp;
+package com.zhandos.SOLIDBankApp.transaction;
 
 public class Transaction {
     String transaction;

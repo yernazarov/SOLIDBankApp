@@ -1,5 +1,7 @@
 package com.zhandos.SOLIDBankApp;
 
+import com.zhandos.SOLIDBankApp.account.AccountDAO;
+import com.zhandos.SOLIDBankApp.account.MemoryAccountDAO;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaceImpl.AccountCreationServiceImpl;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaceImpl.AccountDepositServiceImpl;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaceImpl.AccountListingServiceImpl;
@@ -11,6 +13,10 @@ import com.zhandos.SOLIDBankApp.businessProcessInterfaces.AccountWithdrawService
 import com.zhandos.SOLIDBankApp.cli.AccountBasicCLI;
 import com.zhandos.SOLIDBankApp.cli.TransactionDepositCLI;
 import com.zhandos.SOLIDBankApp.cli.TransactionWithdrawCLI;
+import com.zhandos.SOLIDBankApp.transaction.MemoryTransactionDAO;
+import com.zhandos.SOLIDBankApp.transaction.TransactionDAO;
+import com.zhandos.SOLIDBankApp.transaction.TransactionDeposit;
+import com.zhandos.SOLIDBankApp.transaction.TransactionWithdraw;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

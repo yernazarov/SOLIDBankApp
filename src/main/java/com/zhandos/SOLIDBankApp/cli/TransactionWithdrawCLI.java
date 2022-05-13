@@ -1,8 +1,7 @@
 package com.zhandos.SOLIDBankApp.cli;
 
-import com.zhandos.SOLIDBankApp.Account;
-import com.zhandos.SOLIDBankApp.TransactionWithdraw;
-import com.zhandos.SOLIDBankApp.accountTypes.AccountWithdraw;
+import com.zhandos.SOLIDBankApp.transaction.TransactionWithdraw;
+import com.zhandos.SOLIDBankApp.account.accountTypes.AccountWithdraw;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaces.AccountListingService;
 import com.zhandos.SOLIDBankApp.ui.WithdrawDepositOperationCLIUI;
 

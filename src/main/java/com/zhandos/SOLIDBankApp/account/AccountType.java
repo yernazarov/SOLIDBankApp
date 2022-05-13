@@ -1,4 +1,4 @@
-package com.zhandos.SOLIDBankApp;
+package com.zhandos.SOLIDBankApp.account;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

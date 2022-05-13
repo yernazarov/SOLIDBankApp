@@ -1,4 +1,4 @@
-package com.zhandos.SOLIDBankApp;
+package com.zhandos.SOLIDBankApp.transaction;
 
 import java.util.ArrayList;
 import java.util.List;

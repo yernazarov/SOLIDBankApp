@@ -1,6 +1,6 @@
-package com.zhandos.SOLIDBankApp;
+package com.zhandos.SOLIDBankApp.transaction;
 
-import com.zhandos.SOLIDBankApp.accountTypes.AccountWithdraw;
+import com.zhandos.SOLIDBankApp.account.accountTypes.AccountWithdraw;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaces.AccountWithdrawService;
 
 public class TransactionWithdraw {

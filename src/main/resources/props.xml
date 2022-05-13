@@ -7,7 +7,7 @@
     <bean id="myCLI" class="com.zhandos.SOLIDBankApp.MyCLI">
     </bean>
 
-    <bean id="accountDAO" class="com.zhandos.SOLIDBankApp.MemoryAccountDAO">
+    <bean id="accountDAO" class="com.zhandos.SOLIDBankApp.account.MemoryAccountDAO">
     </bean>
 
     <bean id="accountCreation" class="com.zhandos.SOLIDBankApp.businessProcessInterfaceImpl.AccountCreationServiceImpl">

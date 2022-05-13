@@ -1,7 +1,7 @@
-package com.zhandos.SOLIDBankApp.accountTypes;
+package com.zhandos.SOLIDBankApp.account.accountTypes;
 
-import com.zhandos.SOLIDBankApp.Account;
-import com.zhandos.SOLIDBankApp.AccountType;
+import com.zhandos.SOLIDBankApp.account.Account;
+import com.zhandos.SOLIDBankApp.account.AccountType;
 
 public class AccountWithdraw extends Account {
 

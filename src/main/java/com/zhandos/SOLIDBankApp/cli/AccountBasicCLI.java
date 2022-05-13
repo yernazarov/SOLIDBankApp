@@ -1,7 +1,7 @@
 package com.zhandos.SOLIDBankApp.cli;
 
-import com.zhandos.SOLIDBankApp.Account;
-import com.zhandos.SOLIDBankApp.AccountType;
+import com.zhandos.SOLIDBankApp.account.Account;
+import com.zhandos.SOLIDBankApp.account.AccountType;
 import com.zhandos.SOLIDBankApp.BankCore;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaces.AccountListingService;
 import com.zhandos.SOLIDBankApp.ui.CreateAccountOperationUI;

@@ -1,4 +1,4 @@
-package com.zhandos.SOLIDBankApp;
+package com.zhandos.SOLIDBankApp.cli;
 
 import com.zhandos.SOLIDBankApp.ui.CreateAccountOperationUI;
 import com.zhandos.SOLIDBankApp.ui.WithdrawDepositOperationCLIUI;

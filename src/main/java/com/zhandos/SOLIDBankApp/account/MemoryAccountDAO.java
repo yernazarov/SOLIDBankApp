@@ -1,13 +1,13 @@
-package com.zhandos.SOLIDBankApp;
+package com.zhandos.SOLIDBankApp.account;
 
-import com.zhandos.SOLIDBankApp.accountTypes.AccountWithdraw;
+import com.zhandos.SOLIDBankApp.account.accountTypes.AccountWithdraw;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class MemoryAccountDAO implements AccountDAO{
-    private List<Account> accountList = new ArrayList<Account>();
+    private List<Account> accountList = new ArrayList<>();
 
     @Override
     public List<Account> getClientAccounts(String clientID) {
@@ -32,11 +32,10 @@ public class MemoryAccountDAO implements AccountDAO{
 
     @Override
     public List<Account> getClientAccountsByType(String clientID, AccountType accountType) {
-        List<Account> accountsByType = this.accountList.stream()
+        return this.accountList.stream()
                 .filter(x -> x.getAccountType() == accountType)
                 .filter(x -> x.getClientID().equals(clientID))
                 .collect(Collectors.toList());
-        return accountsByType;
     }
 
     @Override

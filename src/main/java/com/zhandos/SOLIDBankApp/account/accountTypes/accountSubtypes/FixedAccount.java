@@ -1,7 +1,7 @@
-package com.zhandos.SOLIDBankApp.accountTypes.accountSubtypes;
+package com.zhandos.SOLIDBankApp.account.accountTypes.accountSubtypes;
 
-import com.zhandos.SOLIDBankApp.AccountType;
-import com.zhandos.SOLIDBankApp.accountTypes.AccountDeposit;
+import com.zhandos.SOLIDBankApp.account.AccountType;
+import com.zhandos.SOLIDBankApp.account.accountTypes.AccountDeposit;
 
 public class FixedAccount extends AccountDeposit {
     public FixedAccount(AccountType accountType, String id, String clientID, double balance) {

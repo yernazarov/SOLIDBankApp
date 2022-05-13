@@ -1,12 +1,12 @@
 package com.zhandos.SOLIDBankApp.businessProcessInterfaceImpl;
 
-import com.zhandos.SOLIDBankApp.Account;
+import com.zhandos.SOLIDBankApp.account.Account;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaces.AccountCreationService;
-import com.zhandos.SOLIDBankApp.AccountDAO;
-import com.zhandos.SOLIDBankApp.AccountType;
-import com.zhandos.SOLIDBankApp.accountTypes.accountSubtypes.CheckingAccount;
-import com.zhandos.SOLIDBankApp.accountTypes.accountSubtypes.FixedAccount;
-import com.zhandos.SOLIDBankApp.accountTypes.accountSubtypes.SavingAccount;
+import com.zhandos.SOLIDBankApp.account.AccountDAO;
+import com.zhandos.SOLIDBankApp.account.AccountType;
+import com.zhandos.SOLIDBankApp.account.accountTypes.accountSubtypes.CheckingAccount;
+import com.zhandos.SOLIDBankApp.account.accountTypes.accountSubtypes.FixedAccount;
+import com.zhandos.SOLIDBankApp.account.accountTypes.accountSubtypes.SavingAccount;
 
 public class AccountCreationServiceImpl implements AccountCreationService {
     private AccountDAO accountDAO;

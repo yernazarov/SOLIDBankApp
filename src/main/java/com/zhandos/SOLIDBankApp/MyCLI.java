@@ -1,16 +1,11 @@
 package com.zhandos.SOLIDBankApp;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.lang.Nullable;
+import com.zhandos.SOLIDBankApp.account.AccountType;
+import com.zhandos.SOLIDBankApp.cli.CLIUI;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Objects;
 import java.util.Scanner;
 
-public class MyCLI implements CLIUI{
+public class MyCLI implements CLIUI {
     private Scanner scanner;
 
     public MyCLI() {
@@ -28,7 +23,7 @@ public class MyCLI implements CLIUI{
 
     public double requestClientAmount() {
         System.out.println("Type amount of money");
-        double amount = -1;
+        double amount;
         while (true) {
             if (!this.scanner.hasNextDouble()) {
                 tryAgain();

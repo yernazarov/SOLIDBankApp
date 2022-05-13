@@ -1,8 +1,7 @@
 package com.zhandos.SOLIDBankApp.businessProcessInterfaceImpl;
 
-import com.zhandos.SOLIDBankApp.Account;
-import com.zhandos.SOLIDBankApp.AccountDAO;
-import com.zhandos.SOLIDBankApp.accountTypes.AccountWithdraw;
+import com.zhandos.SOLIDBankApp.account.AccountDAO;
+import com.zhandos.SOLIDBankApp.account.accountTypes.AccountWithdraw;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaces.AccountWithdrawService;
 
 public class AccountWithdrawServiceImpl implements AccountWithdrawService {
