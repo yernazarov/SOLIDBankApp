@@ -22,6 +22,7 @@ public class Main implements CommandLineRunner {
     }
     @Override
     public void run(String... arg0) {
+
         AccountBasicCLI accountBasicCLI = this.context.getBean(AccountBasicCLI.class);
         TransactionWithdrawCLI transactionWithdrawCLI = context.getBean(TransactionWithdrawCLI.class);
         TransactionDepositCLI transactionDepositCLI = context.getBean(TransactionDepositCLI.class);
