@@ -1,10 +1,10 @@
 package com.zhandos.SOLIDBankApp;
 
-import com.zhandos.SOLIDBankApp.account.AccountType;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaces.AccountCreationService;
+import org.springframework.data.annotation.Id;
 
 public class BankCore {
-    private static long id = 1;
+    private static @Id long id = 1;
     private long lastAccountNumber = 1;
     private AccountCreationService accountCreation;
 
@@ -12,7 +12,7 @@ public class BankCore {
         this.accountCreation = accountCreation;
     }
 
-    public void createNewAccount(AccountType accountType, String clientID) {
+    public void createNewAccount(String accountType, String clientID) {
         accountCreation.create(accountType, id, clientID, lastAccountNumber);
         incrementLastAccountNumber();
         System.out.println("Bank account created");

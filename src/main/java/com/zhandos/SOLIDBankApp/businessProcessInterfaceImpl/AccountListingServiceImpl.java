@@ -2,15 +2,17 @@ package com.zhandos.SOLIDBankApp.businessProcessInterfaceImpl;
 
 import com.zhandos.SOLIDBankApp.account.Account;
 import com.zhandos.SOLIDBankApp.account.AccountDAO;
-import com.zhandos.SOLIDBankApp.account.AccountType;
+import com.zhandos.SOLIDBankApp.account.MemoryAccountDAO;
 import com.zhandos.SOLIDBankApp.account.accountTypes.AccountWithdraw;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaces.AccountListingService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@AllArgsConstructor
 public class AccountListingServiceImpl implements AccountListingService {
+
+    @Autowired
     private AccountDAO accountDAO;
 
     @Override
@@ -29,7 +31,7 @@ public class AccountListingServiceImpl implements AccountListingService {
     }
 
     @Override
-    public List<Account> getClientAccountsByType(String clientID, AccountType accountType) {
+    public List<Account> getClientAccountsByType(String clientID, String accountType) {
         return accountDAO.getClientAccountsByType(clientID, accountType);
     }
 }

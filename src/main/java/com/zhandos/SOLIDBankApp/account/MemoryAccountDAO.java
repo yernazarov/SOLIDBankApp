@@ -4,6 +4,7 @@ import com.zhandos.SOLIDBankApp.account.accountTypes.AccountWithdraw;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class MemoryAccountDAO implements AccountDAO{
@@ -22,16 +23,12 @@ public class MemoryAccountDAO implements AccountDAO{
     }
 
     @Override
-    public void updateAccount(Account account) {
-        Account accountToBeUpdated = accountList.stream()
-                .filter(x -> account.getId().equals(x.getId()))
-                .findAny()
-                .orElse(null);
-        System.out.println("This feature is not represented properly in the UML diagram");
+    public void updateAccount(Account account, double amount) {
+        account.setBalance(amount);
     }
 
     @Override
-    public List<Account> getClientAccountsByType(String clientID, AccountType accountType) {
+    public List<Account> getClientAccountsByType(String clientID, String accountType) {
         return this.accountList.stream()
                 .filter(x -> x.getAccountType() == accountType)
                 .filter(x -> x.getClientID().equals(clientID))
@@ -55,5 +52,65 @@ public class MemoryAccountDAO implements AccountDAO{
                 .filter(x -> x.getId().equals(accountID))
                 .findAny()
                 .orElse(null);
+    }
+
+    @Override
+    public <S extends Account> S save(S entity) {
+        return null;
+    }
+
+    @Override
+    public <S extends Account> Iterable<S> saveAll(Iterable<S> entities) {
+        return null;
+    }
+
+    @Override
+    public Optional<Account> findById(Long aLong) {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean existsById(Long aLong) {
+        return false;
+    }
+
+    @Override
+    public Iterable<Account> findAll() {
+        return null;
+    }
+
+    @Override
+    public Iterable<Account> findAllById(Iterable<Long> longs) {
+        return null;
+    }
+
+    @Override
+    public long count() {
+        return 0;
+    }
+
+    @Override
+    public void deleteById(Long aLong) {
+
+    }
+
+    @Override
+    public void delete(Account entity) {
+
+    }
+
+    @Override
+    public void deleteAllById(Iterable<? extends Long> longs) {
+
+    }
+
+    @Override
+    public void deleteAll(Iterable<? extends Account> entities) {
+
+    }
+
+    @Override
+    public void deleteAll() {
+
     }
 }

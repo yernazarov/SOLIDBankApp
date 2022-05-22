@@ -1,8 +1,6 @@
 package com.zhandos.SOLIDBankApp;
 
-import com.zhandos.SOLIDBankApp.account.AccountType;
 import com.zhandos.SOLIDBankApp.cli.CLIUI;
-
 import java.util.Scanner;
 
 public class MyCLI implements CLIUI {
@@ -45,14 +43,14 @@ public class MyCLI implements CLIUI {
         return this.scanner.nextLine();
     }
 
-    public AccountType requestAccountType() {
+    public String requestAccountType() {
         System.out.println("Choose account type\n[CHECKING, SAVING, FIXED]");
         String accountTypeName = this.scanner.nextLine();
         if (!accountTypeName.equals("CHECKING") && !accountTypeName.equals("SAVING") && !accountTypeName.equals("FIXED")) {
             System.out.println("Error, you entered wrong account type, try again!");
             return null;
         } else {
-            return new AccountType(accountTypeName);
+            return accountTypeName;
         }
     }
 }

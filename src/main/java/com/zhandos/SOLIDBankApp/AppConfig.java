@@ -28,28 +28,23 @@ public class AppConfig {
     }
 
     @Bean
-    public AccountDAO accountDAO() {
-        return new MemoryAccountDAO();
-    }
-
-    @Bean
     public AccountCreationService accountCreation() {
-        return new AccountCreationServiceImpl(accountDAO());
+        return new AccountCreationServiceImpl();
     }
 
     @Bean
     public AccountListingService accountListing() {
-        return new AccountListingServiceImpl(accountDAO());
+        return new AccountListingServiceImpl();
     }
 
     @Bean
     public AccountWithdrawService accountWithdrawService() {
-        return new AccountWithdrawServiceImpl(accountDAO());
+        return new AccountWithdrawServiceImpl();
     }
 
     @Bean
     public AccountDepositService accountDepositService() {
-        return new AccountDepositServiceImpl(accountDAO());
+        return new AccountDepositServiceImpl();
     }
 
     @Bean

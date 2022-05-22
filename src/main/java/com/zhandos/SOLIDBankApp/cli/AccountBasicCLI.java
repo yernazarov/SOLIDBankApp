@@ -1,7 +1,6 @@
 package com.zhandos.SOLIDBankApp.cli;
 
 import com.zhandos.SOLIDBankApp.account.Account;
-import com.zhandos.SOLIDBankApp.account.AccountType;
 import com.zhandos.SOLIDBankApp.BankCore;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaces.AccountListingService;
 import com.zhandos.SOLIDBankApp.ui.CreateAccountOperationUI;
@@ -17,7 +16,7 @@ public class AccountBasicCLI {
     private AccountListingService accountListing;
 
     public void createAccountRequest(String clientID) {
-        AccountType accountType = createAccountOperationUI.requestAccountType();
+        String accountType = createAccountOperationUI.requestAccountType();
         if (accountType == null) {
             return;
         }
