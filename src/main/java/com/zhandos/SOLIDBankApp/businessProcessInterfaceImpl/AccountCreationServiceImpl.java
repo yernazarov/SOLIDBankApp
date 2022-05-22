@@ -1,7 +1,6 @@
 package com.zhandos.SOLIDBankApp.businessProcessInterfaceImpl;
 
 import com.zhandos.SOLIDBankApp.account.Account;
-import com.zhandos.SOLIDBankApp.account.MemoryAccountDAO;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaces.AccountCreationService;
 import com.zhandos.SOLIDBankApp.account.AccountDAO;
 import com.zhandos.SOLIDBankApp.account.accountTypes.accountSubtypes.CheckingAccount;
@@ -24,6 +23,7 @@ public class AccountCreationServiceImpl implements AccountCreationService {
             case "FIXED" -> new FixedAccount(accountType, id, clientID, 0);
             default -> throw new IllegalStateException("Unexpected value");
         };
-        accountDAO.createNewAccount(account);
+        accountDAO.createNewAccount(account.getId(), account.getAccountType(), account.getClientID(),
+                account.getBalance(), account.isWithdrawAllowed());
     }
 }

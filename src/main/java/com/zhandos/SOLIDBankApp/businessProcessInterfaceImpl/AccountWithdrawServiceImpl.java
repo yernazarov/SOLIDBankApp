@@ -1,7 +1,6 @@
 package com.zhandos.SOLIDBankApp.businessProcessInterfaceImpl;
 
 import com.zhandos.SOLIDBankApp.account.AccountDAO;
-import com.zhandos.SOLIDBankApp.account.MemoryAccountDAO;
 import com.zhandos.SOLIDBankApp.account.accountTypes.AccountWithdraw;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaces.AccountWithdrawService;
 import lombok.AllArgsConstructor;
@@ -14,6 +13,6 @@ public class AccountWithdrawServiceImpl implements AccountWithdrawService {
 
     @Override
     public void withdraw(double amount, AccountWithdraw account) {
-        accountDAO.updateAccount(account, account.getBalance()-amount);
+        accountDAO.updateAccount(account.getId(), account.getBalance()-amount);
     }
 }

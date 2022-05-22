@@ -17,7 +17,7 @@ public class TransactionWithdrawCLI {
         String accountID = withdrawDepositOperationCLIUI.requestClientAccountNumber();
         AccountWithdraw account = accountListing.getClientWithdrawAccount(clientID, accountID);
         if (account == null) {
-            System.out.println("Error, you there was not Withdraw Account found by this ID");
+            System.out.println("Error, there was not Withdraw Account found by this ID");
             return;
         }
         transactionWithdraw.execute(account, amount);

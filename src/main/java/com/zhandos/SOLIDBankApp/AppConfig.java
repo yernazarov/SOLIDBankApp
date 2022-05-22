@@ -1,7 +1,6 @@
 package com.zhandos.SOLIDBankApp;
 
 import com.zhandos.SOLIDBankApp.account.AccountDAO;
-import com.zhandos.SOLIDBankApp.account.MemoryAccountDAO;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaceImpl.AccountCreationServiceImpl;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaceImpl.AccountDepositServiceImpl;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaceImpl.AccountListingServiceImpl;

@@ -2,14 +2,17 @@ package com.zhandos.SOLIDBankApp.account;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
 @Data
-public abstract class Account {
-    private String accountType;
-    private  @Id String id;
-    private String clientID;
-    private double balance;
-    private boolean withdrawAllowed;
+public class Account {
+    private @Column("account_type") String accountType;
+    @Column("id")
+    private String id;
+    private @Column("client_id") String clientID;
+    private @Column("balance") double balance;
+    private @Column("withdraw_allowed") boolean withdrawAllowed;
     @Override
     public String toString() {
         return String.format("Account{accountType=%s, id='%s', clientID='%s', balance=%.1f}", accountType, id, clientID, balance);
