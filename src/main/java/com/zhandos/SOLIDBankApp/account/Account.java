@@ -8,8 +8,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Data
 public class Account {
     private @Column("account_type") String accountType;
-    @Column("id")
-    private String id;
+    private @Column("id") @Id String id;
     private @Column("client_id") String clientID;
     private @Column("balance") double balance;
     private @Column("withdraw_allowed") boolean withdrawAllowed;
