@@ -12,7 +12,6 @@ import com.zhandos.SOLIDBankApp.businessProcessInterfaces.AccountWithdrawService
 import com.zhandos.SOLIDBankApp.cli.AccountBasicCLI;
 import com.zhandos.SOLIDBankApp.cli.TransactionDepositCLI;
 import com.zhandos.SOLIDBankApp.cli.TransactionWithdrawCLI;
-import com.zhandos.SOLIDBankApp.transaction.MemoryTransactionDAO;
 import com.zhandos.SOLIDBankApp.transaction.TransactionDAO;
 import com.zhandos.SOLIDBankApp.transaction.TransactionDeposit;
 import com.zhandos.SOLIDBankApp.transaction.TransactionWithdraw;
@@ -56,13 +55,10 @@ public class AppConfig {
         return new AccountBasicCLI(myCLI(), bankCore(), accountListing());
     }
 
-    private TransactionDAO transactionDAO() {
-        return new MemoryTransactionDAO();
-    }
 
     @Bean
     public TransactionWithdraw transactionWithdraw() {
-        return new TransactionWithdraw(accountWithdrawService(), transactionDAO());
+        return new TransactionWithdraw(accountWithdrawService());
     }
 
     @Bean
@@ -72,7 +68,7 @@ public class AppConfig {
 
     @Bean
     public TransactionDeposit transactionDeposit() {
-        return new TransactionDeposit(accountDepositService(), transactionDAO());
+        return new TransactionDeposit(accountDepositService());
     }
 
     @Bean
