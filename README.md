@@ -12,4 +12,4 @@ This is the homework project for Spring Core course by JUSAN.
    3. Hit the run button (green triangle)
 
 * Alternatively, you can run this project directly in your command line by getting to the project folder (SOLIDBankApp) and running this command:
-  ```java -cp out/artifacts/SOLIDBankApp_jar/SOLIDBankApp.jar src/main/java/com/zhandos/SOLIDBankApp/Main.java```
+  ```java -cp out/artifacts/backend_3_solid_bank_app_boot_yernazarov_jar/backend-3-solid-bank-app-boot-yernazarov.jar src/main/java/com/zhandos/SOLIDBankApp/Main.java```
