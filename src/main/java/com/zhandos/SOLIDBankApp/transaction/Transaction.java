@@ -7,6 +7,12 @@ import org.springframework.data.relational.core.mapping.Column;
 @AllArgsConstructor
 public class Transaction {
 
-    @Column("transaction")
-    public String transaction;
+    @Column("account_id")
+    private long accountID;
+
+    @Column("amount")
+    private double amount;
+
+    @Column("type")
+    public String type;
 }

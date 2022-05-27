@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class TransactionDeposit {
     private AccountDepositService accountDepositService;
     @Autowired
-    private TransactionDAO transactionDAO;
+    private TransactionRepository transactionRepository;
 
     public TransactionDeposit(AccountDepositService accountDepositService) {
         this.accountDepositService =accountDepositService;
@@ -16,7 +16,7 @@ public class TransactionDeposit {
 
     public void execute(Account account, double amount) {
         accountDepositService.deposit(amount, account);
-        transactionDAO.addTransaction(String.format("%.2f$ transferred to %s account", amount, account.getId()));
-        System.out.println(transactionDAO.getTransactions().get(transactionDAO.getTransactions().size() - 1).transaction);
+        transactionRepository.addTransaction(account.getId(), amount, "deposit");
+//        System.out.println(transactionDAO.getTransactions().get(transactionDAO.getTransactions().size() - 1).transaction);
     }
 }

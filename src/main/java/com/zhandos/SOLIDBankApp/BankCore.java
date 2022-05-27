@@ -4,7 +4,7 @@ import com.zhandos.SOLIDBankApp.businessProcessInterfaces.AccountCreationService
 import org.springframework.data.annotation.Id;
 
 public class BankCore {
-    private static @Id long id = 1;
+    private static long id = 1;
     private long lastAccountNumber = 1;
     private AccountCreationService accountCreation;
 

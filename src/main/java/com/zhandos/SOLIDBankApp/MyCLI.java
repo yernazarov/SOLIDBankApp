@@ -38,9 +38,11 @@ public class MyCLI implements CLIUI {
         return amount;
     }
 
-    public String requestClientAccountNumber() {
+    public long requestClientAccountNumber() {
         System.out.println("Type account ID");
-        return this.scanner.nextLine();
+        long accountID = this.scanner.nextInt();
+        this.scanner.nextLine();
+        return accountID;
     }
 
     public String requestAccountType() {

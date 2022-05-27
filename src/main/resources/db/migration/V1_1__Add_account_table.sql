@@ -1,6 +1,6 @@
 CREATE TABLE Account
 (
-    account_id NVARCHAR(MAX)  NOT NULL,
+    account_id INTEGER  NOT NULL AUTO_INCREMENT,
     account_type NVARCHAR(MAX)  NOT NULL,
     client_id NVARCHAR(MAX)  NOT NULL,
     balance FLOAT  NOT NULL,

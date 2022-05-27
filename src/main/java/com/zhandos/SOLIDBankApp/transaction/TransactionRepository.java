@@ -8,13 +8,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TransactionDAO extends CrudRepository<Transaction, Long> {
-    @Query("SELECT * FROM Transaction ORDER BY transaction")
+public interface TransactionRepository extends CrudRepository<Transaction, Long> {
+    @Query("SELECT * FROM Transaction ORDER BY id DESC")
     List<Transaction> getTransactions();
 
     @Modifying
     @Query(
-            "INSERT INTO Transaction (transaction) VALUES (:transaction)"
+            "INSERT INTO Transaction (account_id, amount, type) VALUES (:accountID, :amount, :type)"
     )
-    void addTransaction(String transaction);
+    void addTransaction(long accountID, double amount, String type);
+
+
 }
