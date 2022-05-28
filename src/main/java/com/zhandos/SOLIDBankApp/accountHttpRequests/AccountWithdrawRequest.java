@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountCreateRequest {
-    private String accountType;
+public class AccountWithdrawRequest {
+    private double amount;
+    private long accountID;
 }

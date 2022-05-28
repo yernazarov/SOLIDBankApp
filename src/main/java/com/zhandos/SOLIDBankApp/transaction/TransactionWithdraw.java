@@ -14,14 +14,12 @@ public class TransactionWithdraw {
         this.accountWithdrawService = accountWithdrawService;
     }
 
-    public void execute(AccountWithdraw account, double amount) {
+    public void execute(AccountWithdraw account, double amount) throws Exception {
         if (account.getBalance() > amount) {
             accountWithdrawService.withdraw(amount, account);
             transactionRepository.addTransaction(account.getId(), amount, "withdraw");
-//            Transaction lastTransaction = transactionDAO.getTransactions().get(transactionDAO.getTransactions().size()-1);
-//            System.out.println(String.format("%.2f$ transferred from %s account", amount, account.getId()));
         } else {
-            System.out.println("You do not have sufficient funds for this operation");
+            throw new Exception("You do not have sufficient funds for this operation");
         }
 
     }

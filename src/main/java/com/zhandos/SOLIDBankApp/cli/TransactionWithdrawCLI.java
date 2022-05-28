@@ -20,6 +20,10 @@ public class TransactionWithdrawCLI {
             System.out.println("Error, there was not Withdraw Account found by this ID");
             return;
         }
-        transactionWithdraw.execute(account, amount);
+        try { //todo handle
+            transactionWithdraw.execute(account, amount);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
