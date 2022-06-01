@@ -14,7 +14,7 @@ public class TransactionDepositCLI {
 
     public void depositMoney(String clientID) {
         double amount = withdrawDepositOperationCLIUI.requestClientAmount();
-        long accountID = withdrawDepositOperationCLIUI.requestClientAccountNumber();
+        String accountID = withdrawDepositOperationCLIUI.requestClientAccountID();
         Account account = accountListing.getClientAccount(clientID, accountID);
         if (account == null) {
             System.out.println("Error, you entered wrong account number");

@@ -13,17 +13,17 @@ public interface TransactionRepository extends CrudRepository<Transaction, Long>
     List<Transaction> getTransactions();
 
     @Query("SELECT * FROM Transaction WHERE account_id = :accountID")
-    List<Transaction> findTransactionsByAccountID(long accountID);
+    List<Transaction> findTransactionsByAccountID(String accountID);
 
     @Modifying
     @Query("DELETE FROM Transaction WHERE account_id = :accountID")
-    void deleteTransactionsByAccountID(long accountID);
+    void deleteTransactionsByAccountID(String accountID);
 
     @Modifying
     @Query(
             "INSERT INTO Transaction (account_id, amount, type) VALUES (:accountID, :amount, :type)"
     )
-    void addTransaction(long accountID, double amount, String type);
+    void addTransaction(String accountID, double amount, String type);
 
 
 }

@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountWithdrawRequest {
+public class AccountBalanceRequest {
     private double amount;
-    private long accountID;
 }

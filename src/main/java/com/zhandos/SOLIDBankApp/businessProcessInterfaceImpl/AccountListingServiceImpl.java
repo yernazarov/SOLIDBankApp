@@ -15,12 +15,12 @@ public class AccountListingServiceImpl implements AccountListingService {
     private AccountRepository accountRepository;
 
     @Override
-    public Account getClientAccount(String clientID, long accountID) {
+    public Account getClientAccount(String clientID, String accountID) {
         return accountRepository.getClientAccount(clientID, accountID);
     }
 
     @Override
-    public AccountWithdraw getClientWithdrawAccount(String clientID, long accountID) {
+    public AccountWithdraw getClientWithdrawAccount(String clientID, String accountID) {
         return accountRepository.getClientWithdrawAccount(clientID, accountID);
     }
 
