@@ -6,7 +6,6 @@ import com.zhandos.SOLIDBankApp.cli.TransactionWithdrawCLI;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -72,9 +71,5 @@ public class Main implements CommandLineRunner {
     public static void exit() {
         System.out.println("Application Closed");
         System.exit(0);
-    }
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
     }
 }

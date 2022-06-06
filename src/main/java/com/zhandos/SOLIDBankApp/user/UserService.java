@@ -1,48 +1,39 @@
 package com.zhandos.SOLIDBankApp.user;
 
-import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.data.util.Streamable;
+import com.zhandos.SOLIDBankApp.role.Role;
+import com.zhandos.SOLIDBankApp.role.RoleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
 @Service
-@AllArgsConstructor
 public class UserService {
-    private ModelMapper modelMapper;
+
+    @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    public int createUser(UserRequest userRequest) {
-        User user = User.builder().username(userRequest.getUsername()).
-                password(userRequest.getPassword()).build();
-        User createdUser = userRepository.save(user);
-        return createdUser.getUserID();
-    }
-
-    public void deleteUser(int id) {
-        userRepository.findById((long) id).orElseThrow(() -> new UserNotFound(id));
-        userRepository.deleteById((long) id);
-    }
-
-    public User updateUser(UserRequest userRequest, int id) {
-        userRepository.findById((long) id).orElseThrow(() -> new UserNotFound(id));
-        User user = User.builder().username(userRequest.getUsername())
-                .password(userRequest.getPassword()).userID(id).build();
+    public User saveUser(User user) {
+        Role userRole = roleRepository.findByName("ROLE_USER");
+        user.setRoleId(userRole.getId());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
-    public List<UserResponse> getUsers() {
-        List<UserResponse> UserResponses = Streamable.of(userRepository.findAll())
-                .stream()
-                .map(user -> modelMapper.map(user, UserResponse.class))
-                .collect(Collectors.toList());
-        return UserResponses;
+    public User findByUsername(String username) {
+        return userRepository.findUserByUsername(username);
     }
 
-    public UserResponse getUserById(int id) {
-        User user = userRepository.findById((long) id).orElseThrow(() -> new UserNotFound(id));
-        return modelMapper.map(user, UserResponse.class);
+    public User findByUsernameAndPassword(String username, String password) {
+        User user = findByUsername(username);
+        if (user != null) {
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                return user;
+            }
+        }
+        return null;
     }
 }
-

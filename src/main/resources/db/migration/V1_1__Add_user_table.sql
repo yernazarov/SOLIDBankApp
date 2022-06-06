@@ -1,9 +1,20 @@
+
+CREATE TABLE roles
+(
+    id INTEGER  NOT NULL AUTO_INCREMENT UNIQUE,
+    name NVARCHAR(20)  NOT NULL,
+    CONSTRAINT PK_roles PRIMARY KEY (id)
+);
+
+insert into roles(name) values ('ROLE_ADMIN');
+insert into roles(name) values ('ROLE_USER');
+
 CREATE TABLE users
 (
     id INTEGER  NOT NULL AUTO_INCREMENT UNIQUE,
     username NVARCHAR(MAX)  NOT NULL UNIQUE,
     password NVARCHAR(MAX)  NOT NULL,
-    CONSTRAINT PK_users PRIMARY KEY  (id)
+    role_id INTEGER,
+    CONSTRAINT PK_users PRIMARY KEY  (id),
+    FOREIGN KEY (role_id) REFERENCES roles(id)
 );
-
-INSERT INTO users (username, password) values ('w@a.com', '$2a$16$28myhXGaex5e106VEskTxe3y.ZeaD8E66NUxoV5iO91iZABM0O9SK');

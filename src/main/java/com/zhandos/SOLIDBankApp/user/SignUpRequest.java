@@ -1,10 +1,12 @@
 package com.zhandos.SOLIDBankApp.user;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import jakarta.validation.constraints.NotEmpty;
 
 @Data
-public class UserRequest {
+public class SignUpRequest {
+    @NotEmpty
     private String username;
+    @NotEmpty
     private String password;
 }
