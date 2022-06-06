@@ -9,7 +9,7 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Account {
     private @Column("account_type") String accountType;
     private @Id @Column("account_id") String id;
-    private @Column("client_id") String clientID;
+    private @Column("client_id") int clientID;
     private @Column("balance") double balance;
     private @Column("withdraw_allowed") boolean withdrawAllowed;
     @Override
@@ -17,15 +17,15 @@ public class Account {
         return String.format("Account{accountType=%s, id='%s', clientID='%s', balance=%.1f}", accountType, id, clientID, balance);
     }
 
-    public String getClientID() {
+    public int getClientID() {
         return this.clientID;
     }
 
-    public void setClientID(String clientID) {
+    public void setClientID(int clientID) {
         this.clientID = clientID;
     }
 
-    public Account(String accountType, String id, String clientID, double balance, boolean withdrawAllowed) {
+    public Account(String accountType, String id, int clientID, double balance, boolean withdrawAllowed) {
         this.accountType = accountType;
         this.id = id;
         this.clientID = clientID;

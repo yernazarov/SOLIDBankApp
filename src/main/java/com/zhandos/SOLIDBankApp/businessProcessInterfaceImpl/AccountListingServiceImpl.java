@@ -15,22 +15,22 @@ public class AccountListingServiceImpl implements AccountListingService {
     private AccountRepository accountRepository;
 
     @Override
-    public Account getClientAccount(String clientID, String accountID) {
+    public Account getClientAccount(int clientID, String accountID) {
         return accountRepository.getClientAccount(clientID, accountID);
     }
 
     @Override
-    public AccountWithdraw getClientWithdrawAccount(String clientID, String accountID) {
+    public AccountWithdraw getClientWithdrawAccount(int clientID, String accountID) {
         return accountRepository.getClientWithdrawAccount(clientID, accountID);
     }
 
     @Override
-    public List<Account> getClientAccounts(String clientID) {
+    public List<Account> getClientAccounts(int clientID) {
         return accountRepository.getClientAccounts(clientID);
     }
 
     @Override
-    public List<Account> getClientAccountsByType(String clientID, String accountType) {
+    public List<Account> getClientAccountsByType(int clientID, String accountType) {
         return accountRepository.getClientAccountsByType(clientID, accountType);
     }
 }

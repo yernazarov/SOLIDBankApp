@@ -37,7 +37,7 @@ public class AccountController {
     public ResponseEntity<?> createAccount(@RequestBody AccountCreateRequest accountCreateRequest) {
         Map<String, Object> responseMessage = new HashMap<>();
         try {
-            bankCore.createNewAccount(accountCreateRequest.getAccountType(), "1");
+            bankCore.createNewAccount(accountCreateRequest.getAccountType(), 1);
             responseMessage.put("message", "Account successfully created");
             return new ResponseEntity<>(responseMessage, HttpStatus.OK);
         } catch (Exception e) {
@@ -48,7 +48,7 @@ public class AccountController {
 
     @GetMapping //()
     public List<Account> getAccounts() {
-        return accountListing.getClientAccounts("1");
+        return accountListing.getClientAccounts(1);
     }
 
     @GetMapping("/{accountNumber}")
@@ -56,7 +56,7 @@ public class AccountController {
         Map<String, Object> responseMessage = new HashMap<>();
         HttpStatus httpStatus;
         String accountID = String.format("%03d%06d", 1, accountNumber);
-        Account account = accountListing.getClientAccount("1", accountID);
+        Account account = accountListing.getClientAccount(1, accountID);
         if (account!=null) {
             responseMessage.put("message", account);
             httpStatus = HttpStatus.OK;
@@ -84,7 +84,7 @@ public class AccountController {
         Map<String, Object> responseMessage = new HashMap<>();
         HttpStatus httpStatus;
         try {
-            AccountWithdraw account = accountListing.getClientWithdrawAccount("1", accountID);
+            AccountWithdraw account = accountListing.getClientWithdrawAccount(1, accountID);
             transactionWithdraw.execute(account, amount);
             responseMessage.put("message", String.format("%.2f tenge was withdrawn from account %s", amount, accountID));
             httpStatus = HttpStatus.OK;
@@ -102,7 +102,7 @@ public class AccountController {
         Map<String, Object> responseMessage = new HashMap<>();
         HttpStatus httpStatus;
         try {
-            Account account = accountListing.getClientAccount("1", accountID);
+            Account account = accountListing.getClientAccount(1, accountID);
             transactionDeposit.execute(account, amount);
             responseMessage.put("message", String.format("%.2f tenge was deposited to account %s", amount, accountID));
             httpStatus = HttpStatus.OK;

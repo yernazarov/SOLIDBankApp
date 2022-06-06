@@ -12,7 +12,7 @@ public class TransactionDepositCLI {
     WithdrawDepositOperationCLIUI withdrawDepositOperationCLIUI;
     AccountListingService accountListing;
 
-    public void depositMoney(String clientID) {
+    public void depositMoney(int clientID) {
         double amount = withdrawDepositOperationCLIUI.requestClientAmount();
         String accountID = withdrawDepositOperationCLIUI.requestClientAccountID();
         Account account = accountListing.getClientAccount(clientID, accountID);

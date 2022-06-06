@@ -1,0 +1,7 @@
+CREATE TABLE users
+(
+    id INTEGER  NOT NULL AUTO_INCREMENT,
+    username NVARCHAR(MAX)  NOT NULL,
+    password NVARCHAR(MAX)  NOT NULL,
+    CONSTRAINT PK_users PRIMARY KEY  (id)
+);

@@ -15,7 +15,7 @@ public class AccountBasicCLI {
     private BankCore bankCore;
     private AccountListingService accountListing;
 
-    public void createAccountRequest(String clientID) {
+    public void createAccountRequest(int clientID) {
         String accountType = createAccountOperationUI.requestAccountType();
         if (accountType == null) {
             return;
@@ -23,7 +23,7 @@ public class AccountBasicCLI {
         bankCore.createNewAccount(accountType, clientID);
     }
 
-    public void getAccounts(String clientID) {
+    public void getAccounts(int clientID) {
         List<Account> clientAccounts = accountListing.getClientAccounts(clientID);
         System.out.print("[");
         System.out.print(clientAccounts.stream().

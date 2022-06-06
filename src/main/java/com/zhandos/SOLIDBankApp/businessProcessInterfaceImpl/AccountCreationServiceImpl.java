@@ -15,7 +15,7 @@ public class AccountCreationServiceImpl implements AccountCreationService {
     private AccountRepository accountRepository;
 
     @Override
-    public void create(String accountType, long bankID, String clientID, String accountID) {
+    public void create(String accountType, long bankID, int clientID, String accountID) {
         Account account = switch (accountType) {
             case "SAVING" -> new SavingAccount(accountType, accountID, clientID, 0);
             case "CHECKING" -> new CheckingAccount(accountType, accountID, clientID, 0);

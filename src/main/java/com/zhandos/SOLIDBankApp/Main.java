@@ -28,7 +28,7 @@ public class Main implements CommandLineRunner {
         TransactionDepositCLI transactionDepositCLI = context.getBean(TransactionDepositCLI.class);
         printManual();
         Scanner scanner = new Scanner(System.in);
-        String clientID = "1"; // We are working with only one user and after the exit, all data would be wiped out.
+        int clientID = 1; // We are working with only one user and after the exit, all data would be wiped out.
                                // Therefore, no need for generating new clientIDs. For this project, at least.
         while (true) {
             System.out.print("> ");
