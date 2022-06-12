@@ -9,11 +9,15 @@ import com.zhandos.SOLIDBankApp.transaction.Transaction;
 import com.zhandos.SOLIDBankApp.transaction.TransactionDeposit;
 import com.zhandos.SOLIDBankApp.transaction.TransactionRepository;
 import com.zhandos.SOLIDBankApp.transaction.TransactionWithdraw;
+import com.zhandos.SOLIDBankApp.user.User;
+import com.zhandos.SOLIDBankApp.user.UserRepository;
+import com.zhandos.SOLIDBankApp.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.*;
 
@@ -32,12 +36,15 @@ public class AccountController {
     private TransactionWithdraw transactionWithdraw;
     @Autowired
     private TransactionDeposit transactionDeposit;
+    @Autowired
+    private UserService userService;
 
     @PostMapping
-    public ResponseEntity<?> createAccount(@RequestBody AccountCreateRequest accountCreateRequest) {
+    public ResponseEntity<?> createAccount(Principal principal, @RequestBody AccountCreateRequest accountCreateRequest) {
         Map<String, Object> responseMessage = new HashMap<>();
         try {
-            bankCore.createNewAccount(accountCreateRequest.getAccountType(), 1);
+            User client = userService.findByUsername(principal.getName());
+            bankCore.createNewAccount(accountCreateRequest.getAccountType(), client.getUserID());
             responseMessage.put("message", "Account successfully created");
             return new ResponseEntity<>(responseMessage, HttpStatus.OK);
         } catch (Exception e) {
@@ -47,12 +54,13 @@ public class AccountController {
     }
 
     @GetMapping //()
-    public List<Account> getAccounts() {
-        return accountListing.getClientAccounts(1);
+    public List<Account> getAccounts(Principal principal) {
+        User client = userService.findByUsername(principal.getName());
+        return accountListing.getClientAccounts();
     }
 
     @GetMapping("/{accountNumber}")
-    public ResponseEntity<?> getAccount(@PathVariable long accountNumber) {
+    public ResponseEntity<?> getAccount(Principal principal, @PathVariable long accountNumber) {
         Map<String, Object> responseMessage = new HashMap<>();
         HttpStatus httpStatus;
         String accountID = String.format("%03d%06d", 1, accountNumber);
@@ -68,7 +76,7 @@ public class AccountController {
     }
 
     @DeleteMapping("/{accountNumber}")
-    public ResponseEntity<?> deleteAccount(@PathVariable long accountNumber) {
+    public ResponseEntity<?> deleteAccount(Principal principal, @PathVariable long accountNumber) {
         String accountID = String.format("%03d%06d", 1, accountNumber);
         transactionRepository.deleteTransactionsByAccountID(accountID);
         accountRepository.deleteAccountByAccountID(accountID);
@@ -78,7 +86,7 @@ public class AccountController {
     }
 
     @PostMapping("/{accountNumber}/withdraw")
-    public ResponseEntity<?> withdrawMoney(@PathVariable("accountNumber") long accountNumber, @RequestBody AccountBalanceRequest accountWithdrawRequest) {
+    public ResponseEntity<?> withdrawMoney(Principal principal, @PathVariable("accountNumber") long accountNumber, @RequestBody AccountBalanceRequest accountWithdrawRequest) {
         double amount = accountWithdrawRequest.getAmount();
         String accountID = String.format("%03d%06d", 1, accountNumber);
         Map<String, Object> responseMessage = new HashMap<>();
@@ -96,7 +104,7 @@ public class AccountController {
     }
 
     @PostMapping("/{accountNumber}/deposit")
-    public ResponseEntity<?> depositMoney(@PathVariable("accountNumber") long accountNumber, @RequestBody AccountBalanceRequest accountDepositRequest) {
+    public ResponseEntity<?> depositMoney(Principal principal, @PathVariable("accountNumber") long accountNumber, @RequestBody AccountBalanceRequest accountDepositRequest) {
         double amount = accountDepositRequest.getAmount();
         String accountID = String.format("%03d%06d", 1, accountNumber);
         Map<String, Object> responseMessage = new HashMap<>();
@@ -114,8 +122,26 @@ public class AccountController {
     }
 
     @GetMapping("/{accountNumber}/transactions")
-    public List<Transaction> getTransactions(@PathVariable long accountNumber) {
+    public List<Transaction> getTransactions(Principal principal, @PathVariable long accountNumber) {
         String accountID = String.format("%03d%06d", 1, accountNumber);
         return transactionRepository.findTransactionsByAccountID(accountID);
     }
+
+//    @PostMapping("/{accountNumber}/transfer")
+//    public ResponseEntity<?> depositMoney(@PathVariable("accountNumber") long accountNumber, @RequestBody AccountBalanceRequest accountDepositRequest) {
+//        double amount = accountDepositRequest.getAmount();
+//        String accountID = String.format("%03d%06d", 1, accountNumber);
+//        Map<String, Object> responseMessage = new HashMap<>();
+//        HttpStatus httpStatus;
+//        try {
+//            Account account = accountListing.getClientAccount(1, accountID);
+//            transactionDeposit.execute(account, amount);
+//            responseMessage.put("message", String.format("%.2f tenge was deposited to account %s", amount, accountID));
+//            httpStatus = HttpStatus.OK;
+//        } catch (Exception e) {
+//            responseMessage.put("message", "Error, impossible to deposit");
+//            httpStatus = HttpStatus.BAD_REQUEST;
+//        }
+//        return new ResponseEntity<>(responseMessage, httpStatus);
+//    }
 }
