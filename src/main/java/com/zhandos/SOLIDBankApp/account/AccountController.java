@@ -4,7 +4,9 @@ import com.zhandos.SOLIDBankApp.BankCore;
 import com.zhandos.SOLIDBankApp.account.accountTypes.AccountWithdraw;
 import com.zhandos.SOLIDBankApp.accountHttpRequests.AccountBalanceRequest;
 import com.zhandos.SOLIDBankApp.accountHttpRequests.AccountCreateRequest;
+import com.zhandos.SOLIDBankApp.accountHttpRequests.AccountTransferRequest;
 import com.zhandos.SOLIDBankApp.businessProcessInterfaces.AccountListingService;
+import com.zhandos.SOLIDBankApp.jwt.JwtProvider;
 import com.zhandos.SOLIDBankApp.transaction.Transaction;
 import com.zhandos.SOLIDBankApp.transaction.TransactionDeposit;
 import com.zhandos.SOLIDBankApp.transaction.TransactionRepository;
@@ -38,6 +40,8 @@ public class AccountController {
     private TransactionDeposit transactionDeposit;
     @Autowired
     private UserService userService;
+    @Autowired
+    private JwtProvider jwtProvider;
 
     @PostMapping
     public ResponseEntity<?> createAccount(Principal principal, @RequestBody AccountCreateRequest accountCreateRequest) {
@@ -54,17 +58,18 @@ public class AccountController {
     }
 
     @GetMapping //()
-    public List<Account> getAccounts(Principal principal) {
-        User client = userService.findByUsername(principal.getName());
-        return accountListing.getClientAccounts();
+    public List<Account> getAccounts(@RequestHeader(value="Authorization") String token) {
+        User client = userService.findByUsername(jwtProvider.getUsernameFromToken(token));
+        return accountListing.getClientAccounts(client.getUserID());
     }
 
     @GetMapping("/{accountNumber}")
-    public ResponseEntity<?> getAccount(Principal principal, @PathVariable long accountNumber) {
+    public ResponseEntity<?> getAccount(@RequestHeader(value="Authorization") String token, @PathVariable long accountNumber) {
         Map<String, Object> responseMessage = new HashMap<>();
         HttpStatus httpStatus;
-        String accountID = String.format("%03d%06d", 1, accountNumber);
-        Account account = accountListing.getClientAccount(1, accountID);
+        User client = userService.findByUsername(jwtProvider.getUsernameFromToken(token));
+        String accountID = String.format("%03d%06d", client.getUserID(), accountNumber);
+        Account account = accountListing.getClientAccount(client.getUserID(), accountID);
         if (account!=null) {
             responseMessage.put("message", account);
             httpStatus = HttpStatus.OK;
@@ -76,8 +81,9 @@ public class AccountController {
     }
 
     @DeleteMapping("/{accountNumber}")
-    public ResponseEntity<?> deleteAccount(Principal principal, @PathVariable long accountNumber) {
-        String accountID = String.format("%03d%06d", 1, accountNumber);
+    public ResponseEntity<?> deleteAccount(@RequestHeader(value="Authorization") String token, @PathVariable long accountNumber) {
+        User client = userService.findByUsername(jwtProvider.getUsernameFromToken(token));
+        String accountID = String.format("%03d%06d", client.getUserID(), accountNumber);
         transactionRepository.deleteTransactionsByAccountID(accountID);
         accountRepository.deleteAccountByAccountID(accountID);
         Map<String, Object> responseMessage = new HashMap<>();
@@ -86,13 +92,14 @@ public class AccountController {
     }
 
     @PostMapping("/{accountNumber}/withdraw")
-    public ResponseEntity<?> withdrawMoney(Principal principal, @PathVariable("accountNumber") long accountNumber, @RequestBody AccountBalanceRequest accountWithdrawRequest) {
+    public ResponseEntity<?> withdrawMoney(@RequestHeader(value="Authorization") String token, @PathVariable("accountNumber") long accountNumber, @RequestBody AccountBalanceRequest accountWithdrawRequest) {
         double amount = accountWithdrawRequest.getAmount();
-        String accountID = String.format("%03d%06d", 1, accountNumber);
+        User client = userService.findByUsername(jwtProvider.getUsernameFromToken(token));
+        String accountID = String.format("%03d%06d", client.getUserID(), accountNumber);
         Map<String, Object> responseMessage = new HashMap<>();
         HttpStatus httpStatus;
         try {
-            AccountWithdraw account = accountListing.getClientWithdrawAccount(1, accountID);
+            AccountWithdraw account = accountListing.getClientWithdrawAccount(client.getUserID(), accountID);
             transactionWithdraw.execute(account, amount);
             responseMessage.put("message", String.format("%.2f tenge was withdrawn from account %s", amount, accountID));
             httpStatus = HttpStatus.OK;
@@ -104,13 +111,14 @@ public class AccountController {
     }
 
     @PostMapping("/{accountNumber}/deposit")
-    public ResponseEntity<?> depositMoney(Principal principal, @PathVariable("accountNumber") long accountNumber, @RequestBody AccountBalanceRequest accountDepositRequest) {
+    public ResponseEntity<?> depositMoney(@RequestHeader(value="Authorization") String token, @PathVariable("accountNumber") long accountNumber, @RequestBody AccountBalanceRequest accountDepositRequest) {
         double amount = accountDepositRequest.getAmount();
-        String accountID = String.format("%03d%06d", 1, accountNumber);
+        User client = userService.findByUsername(jwtProvider.getUsernameFromToken(token));
+        String accountID = String.format("%03d%06d", client.getUserID(), accountNumber);
         Map<String, Object> responseMessage = new HashMap<>();
         HttpStatus httpStatus;
         try {
-            Account account = accountListing.getClientAccount(1, accountID);
+            Account account = accountListing.getClientAccount(client.getUserID(), accountID);
             transactionDeposit.execute(account, amount);
             responseMessage.put("message", String.format("%.2f tenge was deposited to account %s", amount, accountID));
             httpStatus = HttpStatus.OK;
@@ -122,26 +130,29 @@ public class AccountController {
     }
 
     @GetMapping("/{accountNumber}/transactions")
-    public List<Transaction> getTransactions(Principal principal, @PathVariable long accountNumber) {
-        String accountID = String.format("%03d%06d", 1, accountNumber);
+    public List<Transaction> getTransactions(@RequestHeader(value="Authorization") String token, @PathVariable long accountNumber) {
+        User client = userService.findByUsername(jwtProvider.getUsernameFromToken(token));
+        String accountID = String.format("%03d%06d", client.getUserID(), accountNumber);
         return transactionRepository.findTransactionsByAccountID(accountID);
     }
 
-//    @PostMapping("/{accountNumber}/transfer")
-//    public ResponseEntity<?> depositMoney(@PathVariable("accountNumber") long accountNumber, @RequestBody AccountBalanceRequest accountDepositRequest) {
-//        double amount = accountDepositRequest.getAmount();
-//        String accountID = String.format("%03d%06d", 1, accountNumber);
-//        Map<String, Object> responseMessage = new HashMap<>();
-//        HttpStatus httpStatus;
-//        try {
-//            Account account = accountListing.getClientAccount(1, accountID);
-//            transactionDeposit.execute(account, amount);
-//            responseMessage.put("message", String.format("%.2f tenge was deposited to account %s", amount, accountID));
-//            httpStatus = HttpStatus.OK;
-//        } catch (Exception e) {
-//            responseMessage.put("message", "Error, impossible to deposit");
-//            httpStatus = HttpStatus.BAD_REQUEST;
-//        }
-//        return new ResponseEntity<>(responseMessage, httpStatus);
-//    }
+    @PostMapping("/{accountNumber}/transfer") //todo
+    public ResponseEntity<?> transferMoney(@RequestHeader(value="Authorization") String token, @PathVariable("accountNumber") long accountNumber, @RequestBody AccountTransferRequest accountTransferRequest) {
+        String destinationID = accountTransferRequest.getDestination_account_id();
+        double amount = accountTransferRequest.getAmount();
+        User client = userService.findByUsername(jwtProvider.getUsernameFromToken(token));
+        String accountID = String.format("%03d%06d", client.getUserID(), accountNumber);
+        Map<String, Object> responseMessage = new HashMap<>();
+        HttpStatus httpStatus;
+        try {
+            Account account = accountListing.getClientAccount(client.getUserID(), accountID);
+            transactionDeposit.execute(account, amount);
+            responseMessage.put("message", String.format("%.2f tenge was deposited to account %s", amount, accountID));
+            httpStatus = HttpStatus.OK;
+        } catch (Exception e) {
+            responseMessage.put("message", "Error, impossible to deposit");
+            httpStatus = HttpStatus.BAD_REQUEST;
+        }
+        return new ResponseEntity<>(responseMessage, httpStatus);
+    }
 }
