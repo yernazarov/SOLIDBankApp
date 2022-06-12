@@ -18,7 +18,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 @SpringBootApplication
-@SecurityScheme(name = "basicauth", scheme = "basic", type = SecuritySchemeType.HTTP, in = SecuritySchemeIn.HEADER)
+@SecurityScheme(name = "jwtauth", scheme = "bearer", type = SecuritySchemeType.HTTP, in = SecuritySchemeIn.HEADER, bearerFormat = "JWT")
 public class Main implements CommandLineRunner {
     @Autowired
     private ApplicationContext context;

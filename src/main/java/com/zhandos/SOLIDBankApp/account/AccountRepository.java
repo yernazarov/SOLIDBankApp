@@ -38,4 +38,6 @@ public interface AccountRepository extends CrudRepository<Account, Long>{
     @Query("DELETE FROM Account WHERE account_id = :accountID")
     void deleteAccountByAccountID(String accountID);
 
+    @Query("SELECT * FROM Account WHERE account_id = :accountID")
+    Account getAccount(String accountID);
 }

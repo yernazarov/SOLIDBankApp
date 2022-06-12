@@ -5,5 +5,6 @@ CREATE TABLE Account
     client_id INTEGER  NOT NULL,
     balance FLOAT  NOT NULL,
     withdraw_allowed BIT  NOT NULL,
-    CONSTRAINT PK_Account PRIMARY KEY  (account_id)
+    CONSTRAINT PK_Account PRIMARY KEY  (account_id),
+    FOREIGN KEY (client_id) REFERENCES users(id)
 );

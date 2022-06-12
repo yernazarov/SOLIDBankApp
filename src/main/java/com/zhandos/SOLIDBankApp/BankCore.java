@@ -15,7 +15,7 @@ public class BankCore {
     }
 
     public void createNewAccount(String accountType, int clientID) {
-        String accountID = String.format("%03d%06d", 1, lastAccountNumber);
+        String accountID = String.format("%03d%06d", clientID, lastAccountNumber);
         accountCreation.create(accountType, id, clientID, accountID);
         incrementLastAccountNumber();
         System.out.println("Bank account created");
