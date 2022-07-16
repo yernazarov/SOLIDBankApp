@@ -1,6 +1,6 @@
 package com.zhandos.SOLIDBankApp.configs;
 
-import com.zhandos.SOLIDBankApp.jwt.JwtFilter;
+import com.zhandos.SOLIDBankApp.configs.jwt.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
